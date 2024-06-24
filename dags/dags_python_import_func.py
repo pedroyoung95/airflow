@@ -13,6 +13,6 @@ with DAG(
 ) as dag:
     
     task_get_sftp = PythonOperator(
-        tast_id='task_get_sftp',
+        tast_id="task_get_sftp",
         python_callable=get_sftp
     )
