@@ -5,3 +5,8 @@ def regist(name, sex, *args):
     print(f'이름: {name}')
     print(f'성별: {sex}')
     print(f'기타옵션들: {args}')
+
+def func_log(task_func):
+    print("작업을 시작합니다")
+    task_func()
+    print("작업을 종료합니다")

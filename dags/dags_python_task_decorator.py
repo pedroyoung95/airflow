@@ -2,6 +2,7 @@ import pendulum
 
 from airflow import DAG
 from airflow.decorators import task
+from common.common_func import func_log
 
 with DAG(
     dag_id = "dags_python_task_decorator",
@@ -11,6 +12,7 @@ with DAG(
 ) as dag:
     
     @task(task_id="python_task_1")
+    @func_log
     def print_context(some_input):
         print(some_input)
         
