@@ -26,8 +26,8 @@ with DAG(
         print(kwargs)
         print('ds : ' + kwargs['ds'] )
         print('ts : ' + kwargs['ts'])
-        print('data_interval_start : ' + kwargs['data_interval_start'])
-        print('data_interval_end : ' + kwargs['data_interval_end'])
+        print('data_interval_start : ' + str(kwargs['data_interval_start']))
+        print('data_interval_end : ' + str(kwargs['data_interval_end']))
         print('ti : ' + kwargs['ti'])
 
     python_t1 >> python_function2()
