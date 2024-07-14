@@ -28,7 +28,7 @@ with DAG(
         print('ts : ' + kwargs['ts'])
         print('data_interval_start : ' + str(kwargs['data_interval_start']))
         print('data_interval_end : ' + str(kwargs['data_interval_end']))
-        print('ti : ' + kwargs['ti'])
+        print('ti : ' + str(kwargs['ti']))
 
     python_t1 >> python_function2()
 
