@@ -24,14 +24,14 @@ with DAG(
         print('----------xcom_pull_2----------')
         print('함수 입력값으로 받은 값:' + status)
 
-    @task(task_id='python_xcom_pull_1')
-    def xcom_pull_3(**kwargs):
-        ti = kwargs['ti']
-        value3 = ti.xcom_pull(task_ids='python_xcom_push_by_return')
-        print('----------xcom_pull_3----------')
-        print('함수 입력값으로 받은 값:' + value3)
+    # @task(task_id='python_xcom_pull_1')
+    # def xcom_pull_3(**kwargs):
+    #     ti = kwargs['ti']
+    #     value3 = ti.xcom_pull(task_ids='python_xcom_push_by_return')
+    #     print('----------xcom_pull_3----------')
+    #     print('함수 입력값으로 받은 값:' + value3)
 
     python_xcom_push_by_return = xcom_push_result()
     xcom_pull_2(python_xcom_push_by_return)
     python_xcom_push_by_return >> xcom_pull_1()
-    xcom_pull_3(python_xcom_push_by_return)
+    # xcom_pull_3(python_xcom_push_by_return)
