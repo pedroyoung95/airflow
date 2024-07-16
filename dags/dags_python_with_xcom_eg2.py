@@ -27,7 +27,7 @@ with DAG(
     @task(task_id='python_xcom_pull_1')
     def xcom_pull_3(**kwargs):
         ti = kwargs['ti']
-        value3 = ti.xcom_pull()
+        value3 = ti.xcom_pull(task_ids='python_xcom_push_by_return')
         print('----------xcom_pull_3----------')
         print('함수 입력값으로 받은 값:' + value3)
 
