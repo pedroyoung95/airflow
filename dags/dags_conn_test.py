@@ -43,7 +43,7 @@ with DAG(
 
     #parallel task lists
     task_list_1 = [t2, t3]
-    task_list_2 = [t4,t7]
+    task_list_2 = [t4, t7]
     
 
     t1>>task_list_1>>t4
