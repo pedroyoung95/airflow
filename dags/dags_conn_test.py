@@ -1,7 +1,7 @@
 from airflow import DAG
 import datetime
 import pendulum
-from airflow.operators.empty import EmptyOperator
+from airflow.providers.standard.operators.empty import EmptyOperator
 
 with DAG(
     dag_id = "dags_conn_test",
@@ -41,7 +41,12 @@ with DAG(
         task_id = "t8"
     )
 
-    t1>>[t2,t3]>>t4
+    #parallel task lists
+    task_list_1 = [t2, t3]
+    task_list_2 = [t4,t7]
+    
+
+    t1>>task_list_1>>t4
     t5>>t4
-    [t4,t7]>>t6>>t8
+    task_list_2>>t6>>t8
 
