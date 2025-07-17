@@ -11,11 +11,12 @@ with DAG(
     catchup=False
 ) as dag:
     
-    @task(task_id='python_push')
+    @task(task_id='python_pull')
     def python_push_xcom():
         result_dic = {'status':'Good', 'data':[1,2,3],'options_cnt':100}
         return result_dic
     
+    @task(task_id='python_push')
     def python_pull_xcom(**kwargs):
         status_value = kwargs['ti'].xcom_pull(key='bash_pushed')
         return_value = kwargs['ti'].xcom_pull(task_ids='bash_push')
@@ -43,10 +44,10 @@ with DAG(
                      'echo PUSH_COMPLETE '
     )
 
-    python_pull = PythonOperator(
-        task_id='python_pull',
-        python_callable=python_pull_xcom
-    )    
+    # python_pull = PythonOperator(
+    #     task_id='python_pull',
+    #     python_callable=python_pull_xcom
+    # )    
 
     
-    python_push_xcom() >> bash_pull >> bash_push >> python_pull
+    python_push_xcom() >> bash_pull >> bash_push >> python_pull_xcom()
