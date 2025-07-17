@@ -12,8 +12,9 @@ with DAG(
 ) as dag:
     
     def python_push_xcom(**kwargs):
+        ti = kwargs['ti']
         result_dic = {'status':'Good', 'data':[1,2,3],'options_cnt':100}
-        kwargs['ti'].xcom_push(key='python_push_key', value=result_dic)
+        ti.xcom_push(key='python_push_key', value=result_dic)
     
     def python_pull_xcom(**kwargs):
         status_value = kwargs['ti'].xcom_pull(key='bash_pushed')
