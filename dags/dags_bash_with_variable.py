@@ -1,4 +1,4 @@
-from airflow import DAG
+from airflow.models.dag import DAG
 import pendulum
 from airflow.providers.standard.operators.bash import BashOperator
 from airflow.models import Variable
@@ -21,4 +21,4 @@ with DAG(
         bash_command=f"echo variable:{{var.value.sample_key}}"
     )
 
-    bash_var_1 >> bash_var_2
+bash_var_1 >> bash_var_2
