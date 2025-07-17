@@ -50,4 +50,5 @@ with DAG(
     # )    
 
     
-    python_push_xcom() >> bash_pull >> bash_push >> python_pull_xcom()
+    python_push_xcom() >> bash_pull 
+    bash_push >> python_pull_xcom()
