@@ -16,13 +16,6 @@ with DAG(
         result_dic = {'status':'Good', 'data':[1,2,3],'options_cnt':100}
         return result_dic
     
-    @task(task_id='python_pull')
-    def python_pull_xcom(**kwargs):
-        status_value = kwargs['ti'].xcom_pull(key='bash_pushed')
-        return_value = kwargs['ti'].xcom_pull(task_ids='bash_push')
-        print('status_value' + str(status_value))
-        print('return_value' + return_value)
-    
     bash_pull = BashOperator(
         task_id='bash_pull',
         env={'STATUS':'{{ ti.xcom_pull(task_ids="python_push")["status"] }}',
@@ -32,10 +25,9 @@ with DAG(
         bash_command='echo $STATUS && echo $DATA && echo $OPTIONS_CNT'
     )
 
-    # python_push = PythonOperator(
-    #     task_id='python_push',
-    #     python_callable=python_push_xcom
-    # )    
+
+    python_push_xcom() >> bash_pull
+
 
     bash_push = BashOperator(
         task_id = 'bash_push',
@@ -44,11 +36,13 @@ with DAG(
                      'echo PUSH_COMPLETE '
     )
 
-    # python_pull = PythonOperator(
-    #     task_id='python_pull',
-    #     python_callable=python_pull_xcom
-    # )    
+    @task(task_id='python_pull')
+    def python_pull_xcom(**kwargs):
+        ti=kwargs['ti']
+        status_value = ti.xcom_pull(key='bash_pushed')
+        return_value = ti.xcom_pull(task_ids='bash_push')
+        print('status_value' + str(status_value))
+        print('return_value' + return_value)
 
-    
-    python_push_xcom() >> bash_pull 
+     
     bash_push >> python_pull_xcom()
