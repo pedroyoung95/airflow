@@ -2,7 +2,6 @@ from airflow.models.dag import DAG
 import pendulum
 from airflow.decorators import task
 from airflow.providers.standard.operators.bash import BashOperator
-from airflow.providers.standard.operators.python import PythonOperator
 
 with DAG(
     dag_id="dags_bash_python_with_xcom",
