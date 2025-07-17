@@ -32,7 +32,7 @@ with DAG(
 
     python_push = PythonOperator(
         task_id='python_push',
-        callable=python_push_xcom
+        python_callable=python_push_xcom
     )    
 
     bash_push = BashOperator(
@@ -44,7 +44,7 @@ with DAG(
 
     python_pull = PythonOperator(
         task_id='python_pull',
-        callable=python_pull_xcom
+        python_callable=python_pull_xcom
     )    
 
     
