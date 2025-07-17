@@ -1,4 +1,4 @@
-from airflow.models.dag import DAG
+from airflow.sdk import DAG
 import pendulum
 from airflow.decorators import task
 from airflow.providers.standard.operators.bash import BashOperator

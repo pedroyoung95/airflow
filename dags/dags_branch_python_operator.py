@@ -1,12 +1,12 @@
-from airflow.models.dag import DAG
+from airflow.sdk import DAG
 import pendulum
 from airflow.providers.standard.operators.python import BranchPythonOperator
 from airflow.providers.standard.operators.python import PythonOperator
 
 with DAG(
     dag_id = "dags_branch_python_operator",
-    schedule = None,
     start_date=pendulum.datetime(2025, 7, 1, tz="Asia/Seoul"),
+    schedule='0 1 * * *',
     catchup = False
 ) as dag :
     def select_random() :
