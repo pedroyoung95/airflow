@@ -1,6 +1,6 @@
 from airflow.models.dag import DAG
 import pendulum
-#from airflow.decorators import task
+from airflow.decorators import task
 from airflow.providers.standard.operators.bash import BashOperator
 from airflow.providers.standard.operators.python import PythonOperator
 
@@ -11,10 +11,10 @@ with DAG(
     catchup=False
 ) as dag:
     
-    def python_push_xcom(**kwargs):
-        ti = kwargs['ti']
+    @task(task_id='python_push')
+    def python_push_xcom():
         result_dic = {'status':'Good', 'data':[1,2,3],'options_cnt':100}
-        ti.xcom_push(key='python_push_key', value=result_dic)
+        return result_dic
     
     def python_pull_xcom(**kwargs):
         status_value = kwargs['ti'].xcom_pull(key='bash_pushed')
@@ -31,10 +31,10 @@ with DAG(
         bash_command='echo $STATUS && echo $DATA && echo $OPTIONS_CNT'
     )
 
-    python_push = PythonOperator(
-        task_id='python_push',
-        python_callable=python_push_xcom
-    )    
+    # python_push = PythonOperator(
+    #     task_id='python_push',
+    #     python_callable=python_push_xcom
+    # )    
 
     bash_push = BashOperator(
         task_id = 'bash_push',
@@ -49,4 +49,4 @@ with DAG(
     )    
 
     
-    python_push >> bash_pull >> bash_push >> python_pull
+    python_push_xcom() >> bash_pull >> bash_push >> python_pull
