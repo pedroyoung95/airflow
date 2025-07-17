@@ -1,7 +1,7 @@
 from airflow.models.dag import DAG
 import datetime
 import pendulum
-from airflow.operators.python import PythonOperator
+from airflow.providers.standard.operators.python import PythonOperator
 from common.common_func import regist2
 
 with DAG(
