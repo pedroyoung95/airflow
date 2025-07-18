@@ -39,7 +39,7 @@ with DAG(
     def task_d() :
         print('정상 처리')
     
-    random_branch() >> [task_a, task_b(), task_c()] > task_d()
+    random_branch() >> [task_a, task_b(), task_c()] >> task_d()
     
     
 
