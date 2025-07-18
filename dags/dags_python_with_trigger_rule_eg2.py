@@ -1,6 +1,5 @@
-from airflow.sdk import DAG
+from airflow.sdk import DAG, task
 import pendulum
-from airflow.decorators import task
 from airflow.providers.standard.operators.bash import BashOperator
 
 with DAG(

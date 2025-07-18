@@ -1,8 +1,7 @@
-from airflow.sdk import DAG
+from airflow.sdk import DAG, task
 import pendulum
-from airflow.decorators import task
 from airflow.providers.standard.operators.bash import BashOperator
-from airflow.exception import AirflowException
+from airflow.exceptions import AirflowException
 
 with DAG(
     dag_id="dags_python_with_trigger_rule_eg1",
