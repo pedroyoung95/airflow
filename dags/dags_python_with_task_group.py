@@ -26,7 +26,7 @@ with DAG(
             op_kwargs = {'msg' : '첫 번째 TaskGroup 내 두 번째 task입니다.'}
         )
     
-        inner_func() >> inner_function2
+        inner_func1() >> inner_function2
 
 
     with TaskGroup(group_id = 'second_group', tooltip = '두 번째 그룹입니다.') as group_2 :
@@ -40,5 +40,7 @@ with DAG(
             python_callable = inner_func,
             op_kwargs = {'msg' : '두 번째 TaskGroup내 두 번째 task입니다.'}
         )
+
+        inner_func1() >> inner_function2
     
     group_1() >> group_2
