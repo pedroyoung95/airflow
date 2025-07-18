@@ -14,7 +14,7 @@ with DAG(
     
     @task_group(group_id = 'first_group')
     def group_1() : 
-        ''' task_group decorator를 이용한 첫 번째 그룹'''
+        ''' task_group decorator를 이용한 첫 번째 그룹''' #docstring : python에서 함수의 설명을 제공 , airflow UI에서는 tooltip이라는 이름으로 나옴
         
         @task(task_id = 'inner_function1')
         def inner_func1(**kwargs) :
