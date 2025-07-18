@@ -35,3 +35,4 @@ with DAG(
     )
 
     empty_2 >> Label('Start Branch') >> [empty_3, empty_4, empty_5] >> Label('End Branch') >> empty_6
+    #task flow 내 task 사이에 Label을 추가하면 해당 연결 선에 Label이 붙음
