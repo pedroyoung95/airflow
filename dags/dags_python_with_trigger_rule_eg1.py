@@ -2,7 +2,6 @@ from airflow.sdk import DAG
 import pendulum
 from airflow.decorators import task
 from airflow.providers.standard.operators.bash import BashOperator
-from airflow.operators import trigger_dagrun
 from airflow.exception import AirflowException
 
 with DAG(
