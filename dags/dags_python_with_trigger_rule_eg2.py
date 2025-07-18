@@ -31,8 +31,12 @@ with DAG(
     def task_b() :
         print('정상 처리')
     
-    @task(task_id = 'task_c', trigger_rule = 'none_skipped')
+    @task(task_id = 'task_c')
     def task_c() :
+        print('정상 처리')
+
+    @task(task_id = 'task_d', trigger_rule = 'none_skipped')
+    def task_d() :
         print('정상 처리')
     
     random_branch() >> [task_a, task_b(), task_c()] > task_d()
