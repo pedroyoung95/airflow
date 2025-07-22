@@ -55,7 +55,7 @@ class SeoulApiToCsvOperator(BaseOperator) :
         response = requests.get(request_url, headers) #request url, header 정보를 가지고 웹에 resquest한 결과(response)를 reponse 변수에 저장
         contents = json.loads(response.text) #dictionary형의 웹으로부터 받은 데이터(문자열이여서 text 필드 사용)를 json 양식으로 load
 
-        key_nm = list(contents.key())[0] #dictionary형의 데이터 중 맨 첫 번째 키 값 저장
+        key_nm = list(contents.keys())[0] #dictionary형의 데이터 중 맨 첫 번째 키 값 저장
         row_data = contents.get(key_nm).get('row') #첫 번째 키 값의 value 내부에서 다시 키 값이 'row'인 value를 저장(실제 웹 데이터 부분)
         row_df = pd.DataFrame(row_data)
 
