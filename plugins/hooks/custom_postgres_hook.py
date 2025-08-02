@@ -18,12 +18,11 @@ class CustomPostgresHook(BaseHook):
         self.postgres_conn = psycopg2.connect(host = self.host, user = self.user, password = self.password, dbname = self.dbname, port = self.port)
         return self.postgres_conn
     
-    def bulk_load(self, table_name, file_name, schema, delimiter: str, is_header: bool, is_replace: bool) :
+    def bulk_load(self, table_name, file_name, delimiter: str, is_header: bool, is_replace: bool) :
         from sqlalchemy import create_engine
 
         self.log.info('적재 대상파일:' + file_name)
         self.log.info('테이블:' + table_name)
-        self.log.info('스키마:' + schema)
         self.get_conn()
         header = 0 if is_header else None                  # is_header = True면 0, False면 None
         if_exists = 'replace' if is_replace else 'append'  # is_replace = True면 replace, False면 append
@@ -42,7 +41,7 @@ class CustomPostgresHook(BaseHook):
         engine = create_engine(uri)
         file_df.to_sql(name = table_name,
                        con = engine,
-                       schema = schema,
+                       schema = 'public',
                        if_exists = if_exists,
                        index = False
                       )
