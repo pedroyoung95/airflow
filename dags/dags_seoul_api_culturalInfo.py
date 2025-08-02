@@ -4,7 +4,7 @@ import pendulum
 
 with DAG(
     dag_id = 'dags_seoul_api_culturalInfo',
-    schedule = None,
+    schedule = '0 7 * * *',
     start_date = pendulum.datetime(2025, 7, 1, tz = 'Asia/Seoul'),
     catchup = False
 ) as dag :
@@ -24,5 +24,6 @@ with DAG(
         file_name = 'culturalSpaceInfo.csv'
     )
 
-    tb_culture_event_info >> tb_culture_space_info
+    tb_culture_event_info 
+    #>> tb_culture_space_info
     
