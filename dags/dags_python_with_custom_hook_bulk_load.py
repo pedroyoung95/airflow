@@ -21,3 +21,5 @@ with DAG(
                      'file_nm' : '/opt/airflow/files/culturalEventInfo/{{data_interval_end.in_timezone("Asia/Seoul") | ds_nodash}}/culturalEventInfo.csv'
                     }
     )
+
+    insrt_postgres
