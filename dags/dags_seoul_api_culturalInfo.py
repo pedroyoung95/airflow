@@ -24,6 +24,5 @@ with DAG(
         file_name = 'culturalSpaceInfo.csv'
     )
 
-    tb_culture_event_info 
-    #>> tb_culture_space_info
+    tb_culture_event_info >> tb_culture_space_info
     
